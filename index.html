@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Portal - Product Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="material-icons">inventory</span>
+                <h2>Supplier Portal</h2>
+            </div>
+            <nav>
+                <a href="#settings" class="nav-item">
+                    <span class="material-icons">settings</span>
+                    <span>ការកំណត់</span>
+                </a>
+                <a href="#finance" class="nav-item">
+                    <span class="material-icons">account_balance</span>
+                    <span>ថ្លៃកសាងប្រាក់</span>
+                </a>
+                <a href="#products" class="nav-item active">
+                    <span class="material-icons">inventory_2</span>
+                    <span>គ្រប់គ្រងផលិតផល</span>
+                </a>
+                <a href="#price" class="nav-item">
+                    <span class="material-icons">local_offer</span>
+                    <span>ថ្លៃកសំណាយ</span>
+                </a>
+                <a href="#reports" class="nav-item">
+                    <span class="material-icons">bar_chart</span>
+                    <span>ថ្លៃកហាយសាល័យ</span>
+                </a>
+                <a href="#calendar" class="nav-item">
+                    <span class="material-icons">calendar_today</span>
+                    <span>ទិន្នន័យ</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="product-section">
+                <!-- Button to show form -->
+                <div class="add-product-button">
+                    <button id="showProductForm" class="btn-add">
+                        <span class="icon">+</span>
+                        បន្ថែមទំនិញថ្មី
+                    </button>
+                </div>
+
+                <!-- Product Form -->
+                <form id="productForm" class="product-form">
+                    <!-- Basic Information Section -->
+                    <div class="form-section">
+                        <h3>ព័ត៌មានមូលដ្ឋាន</h3>
+                        <div class="form-group">
+                            <input type="text" id="productCode" name="productCode" placeholder="លេខកូដទំនិញ *" required>
+                            <button type="button" id="generateCode" class="btn-generate">បង្កើតលេខកូដ</button>
+                        </div>
+                        <input type="text" id="productName" name="productName" placeholder="ឈ្មោះទំនិញ *" required>
+                        <input type="text" id="productNameEn" name="productNameEn" placeholder="ឈ្មោះជាភាសាអង់គ្លេស">
+                    </div>
+
+                    <!-- Brand and Category Section -->
+                    <div class="form-section">
+                        <h3>ចំណាត់ថ្នាក់</h3>
+                        <div class="form-group">
+                            <select id="brand" name="brand">
+                                <option value="">ជ្រើសរើសម៉ាក</option>
+                            </select>
+                            <button type="button" id="addBrand" class="btn-add-option">+</button>
+                            
+                            <select id="category" name="category">
+                                <option value="">ជ្រើសរើសប្រភេទ</option>
+                            </select>
+                            <button type="button" id="addCategory" class="btn-add-option">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Price and Stock Section -->
+                    <div class="form-section">
+                        <h3>តម្លៃ និងស្តុក</h3>
+                        <div class="price-stock-grid">
+                            <!-- Quantity Input -->
+                            <div class="quantity-group">
+                                <label>ចំនួន:</label>
+                                <div class="input-with-buttons">
+                                    <button type="button" class="btn-quantity" data-action="decrease">-</button>
+                                    <input type="text" id="quantity" name="quantity" class="quantity-input" value="0">
+                                    <button type="button" class="btn-quantity" data-action="increase">+</button>
+                                    <select id="unit" name="unit">
+                                        <option value="PCS">ចំនួន</option>
+                                        <option value="KG">គីឡូក្រាម</option>
+                                        <option value="M">ម៉ែត្រ</option>
+                                    </select>
+                                    <button type="button" id="addUnit" class="btn-add-option">+</button>
+                                </div>
+                            </div>
+
+                            <!-- Minimum Stock Input -->
+                            <div class="stock-group">
+                                <label>ស្តុកអប្បបរមា:</label>
+                                <div class="input-with-buttons">
+                                    <button type="button" class="btn-quantity" data-action="decrease">-</button>
+                                    <input type="text" id="stockMin" name="stockMin" class="quantity-input" value="0">
+                                    <button type="button" class="btn-quantity" data-action="increase">+</button>
+                                </div>
+                            </div>
+
+                            <!-- Price Inputs -->
+                            <div class="price-inputs">
+                                <div class="price-group">
+                                    <label>តម្លៃដើម:</label>
+                                    <div class="input-with-buttons">
+                                        <button type="button" class="btn-price" data-action="decrease">-</button>
+                                        <input type="text" id="costPrice" name="costPrice" class="price-input" value="0">
+                                        <button type="button" class="btn-price" data-action="increase">+</button>
+                                        <span class="currency">$</span>
+                                    </div>
+                                </div>
+
+                                <div class="price-group">
+                                    <label>តម្លៃលក់ដុំ:</label>
+                                    <div class="input-with-buttons">
+                                        <button type="button" class="btn-price" data-action="decrease">-</button>
+                                        <input type="text" id="wholesalePrice" name="wholesalePrice" class="price-input" value="0">
+                                        <button type="button" class="btn-price" data-action="increase">+</button>
+                                        <span class="currency">$</span>
+                                    </div>
+                                </div>
+
+                                <div class="price-group">
+                                    <label>តម្លៃលក់រាយ:</label>
+                                    <div class="input-with-buttons">
+                                        <button type="button" class="btn-price" data-action="decrease">-</button>
+                                        <input type="text" id="retailPrice" name="retailPrice" class="price-input" value="0">
+                                        <button type="button" class="btn-price" data-action="increase">+</button>
+                                        <span class="currency">$</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">បោះបង់</button>
+                        <button type="submit" class="btn-save">រក្សាទុក</button>
+                    </div>
+                </form>
+
+                <!-- Product Table -->
+                <div class="product-table-container">
+                    <table id="productTable" class="product-table">
+                        <thead>
+                            <tr>
+                                <th>ល.រ</th>
+                                <th>លេខកូដ</th>
+                                <th>ឈ្មោះទំនិញ</th>
+                                <th>ម៉ាក</th>
+                                <th>ប្រភេទ</th>
+                                <th>ចំនួន</th>
+                                <th>តម្លៃដើម</th>
+                                <th>តម្លៃលក់ដុំ</th>
+                                <th>តម្លៃលក់រាយ</th>
+                                <th>សកម្មភាព</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <!-- Print Button -->
+                <div class="table-actions">
+                    <button class="btn-print" onclick="printProducts()">
+                        <span class="material-icons">print</span>
+                        បោះពុម្ពបញ្ជីផលិតផល
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
